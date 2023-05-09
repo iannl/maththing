@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{
+	font-family:monospace;
+}
+p{
+	margin:2px;
+}
+</style>
+</head>
+<body>
+</body>
+<script>
+
+var upto = 500 // The highest number to calculate for
+class Progressions {}
+Progressions.calculate = (s) => {
+  let list = new Array();
+  let p = 2 * s;
+  let nMax = Math.sqrt(p);
+  for (let n = 2; n <= nMax; n++) {
+    if (p % n === 0) {
+      let q = p / n;
+      if (((q - n) & 1) === 1) {
+        let a = (q - n + 1) / 2;
+        list.push(Progressions.range(a, n));
+      }
+    }
+  }
+  return list;
+};
+Progressions.range = (a, n) => {
+  return [...Array(n).keys()].map(i => i + a);
+};
+function rl() {
+document.body.innerHTML=''
+for (let i = 0; i < upto+1; i++) {
+  document.body.innerHTML+='<p>'+String(i).padStart((upto+1+'').length,'0')+': '+JSON.stringify(Progressions.calculate(i))+'</p><br>'
+} 
+}rl()
+</script>
+</html>
